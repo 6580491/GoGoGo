@@ -52,12 +52,12 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
 
-      - run: mv ${{steps.sign_apk.outputs.signedReleaseFile}} Go_$GITHUB_REF_NAME.apk
-      - uses: ncipollo/release-action@v1
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
-          artifacts: "*.apk"
-          token: ${{ github.token }}
-          generateReleaseNotes: true
+          name: ${{steps.sign_apk.outputs.signedReleaseFile}}
+          path: ${{steps.sign_apk.outputs.signedReleaseFile}}
+
 
 
       # https://github.com/marketplace/actions/auto-changelog
