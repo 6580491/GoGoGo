@@ -52,12 +52,6 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{steps.sign_apk.outputs.signedReleaseFile}}
-          path: ${{steps.sign_apk.outputs.signedReleaseFile}}
-
       - run: mv ${{steps.sign_apk.outputs.signedReleaseFile}} Go_$GITHUB_REF_NAME.apk
       - uses: ncipollo/release-action@v1
         with:
